@@ -1,0 +1,10 @@
+{
+    "loading": {
+        "crawling": "Analyzing website. This process can take ~1 minute",
+        "search": "Analyzing website. This process can take ~1 minute",
+        "taking_imgs": "Analyzing website. This process can take ~1 minute",
+        "looking": "Analyzing website. This process can take ~1 minute",
+        "analyze": "Analyzing website. This process can take ~1 minute",
+        "report": "Analyzing website. This process can take ~1 minute"
+    }
+}

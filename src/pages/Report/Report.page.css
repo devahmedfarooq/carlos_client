@@ -1,0 +1,32 @@
+.circular-progress {
+    background: conic-gradient(
+        #3b8376 0deg,
+        #3b8376 calc(var(--percentage) * 1deg),
+        #ededed calc(var(--percentage) * 1deg),
+        #ededed 360deg
+    );
+}
+.circular-progress::before {
+    content: '';
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+
+.img-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .cropped-img {
+    width: 100%;
+    height: 600px; /* Each img takes 1 screen height */
+    object-fit: cover;
+    /* objectPosition will control the portion of the image shown */
+  }
+  

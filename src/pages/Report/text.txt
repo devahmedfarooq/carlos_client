@@ -1,0 +1,51 @@
+
+                                    <div
+                                        data-w-id="a358809b-5274-3bb2-85c8-786bbbae897b"
+
+                                        className={report[5].score >= 80 ? "left_lottie green-score vertical" : report[5].score >= 50 && report[5].score > 80 ? "left_lottie  vertical" : "left_lottie red-score vertical"}
+                                    >
+                                        <div className="f-flex">
+                                            <div className="wrap_loader">
+                                                {
+                                                    report[5].score > 95 &&  <div className="top-flair">
+                                                    <div>
+                                                        <span className="text-span">
+                                                            <strong></strong>
+                                                        </span>
+                                                        Top
+                                                    </div>
+                                                </div>
+                                                }
+                                               
+                                                <div
+                                                    className="lottie_loading-animation"
+                                                    data-w-id="a358809b-5274-3bb2-85c8-786bbbae8983"
+                                                    data-animation-type="lottie"
+                                                    data-src="https://uploads-ssl.webflow.com/65d6b07e881400eb28a1e8e5/65d6b07e881400eb28a1e927_Animation%20-%201707911314216.json"
+                                                    data-loop={1}
+                                                    data-direction={1}
+                                                    data-autoplay={1}
+                                                    data-is-ix2-target={0}
+                                                    data-renderer="svg"
+                                                    data-default-duration={6}
+                                                    data-duration={0}
+                                                />
+                                                <div style={{maxWidth : "200px"}}>
+                                                    <a href="#" className={report[5].score >= 80 ? "link green-score" : report[5].score >= 50 && report[5].score > 80 ? "link" : "link red-score"}>
+                                                        {report[5].title}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div className={report[5].score >= 80 ? "score-bar green-score" : report[5].score >= 50 && report[5].score > 80 ? "score-bar medium-score" : "score-bar red-score"}>
+                                                <div className={report[5].score >= 80 ? "score-bar-inside green-score" : report[5].score >= 50 && report[5].score > 80 ? "score-bar-inside medium-score" : "score-bar-inside red-score"  } style={{ width: `${report[5].score * 2}px` }} />
+                                            </div>
+                                            <div>
+                                                <a href="#" className={report[5].score >= 80  ? "link green-score" : report[5].score >= 50 && report[5].score > 80 ? "link medium-score" : "link red-score" }>
+                                                    <strong>{report[5].score} / 100</strong>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div className="s-text">
+                                            {report[5].description}
+                                        </div>
+                                    </div>
