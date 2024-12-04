@@ -29,7 +29,7 @@ const RandomBold: React.FC<RandomBoldProps> = ({ text }) => {
     const boldWords = (text: string): JSX.Element[] => {
         const words = text.split(' ');
         const numWords = words.length;
-        const elements: JSX.Element[] = [];
+        const elements: JSX.Element[] | any[] = [];
         const boldedIndexes: Set<number> = new Set();
 
         const getRandomIndex = (avoidFiller: boolean = false, offset: number = 0, limit: number = numWords): number => {
@@ -71,7 +71,7 @@ const RandomBold: React.FC<RandomBoldProps> = ({ text }) => {
         words.forEach((word, index) => {
             const isBold = boldedIndexes.has(index);
             const wordElement = isBold ? <strong key={index}>{word}</strong> : <span key={index}>{word}</span>;
-            elements.push(wordElement, ' ');
+            elements.push(wordElement);
         });
 
         return elements;

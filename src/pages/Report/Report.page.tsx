@@ -255,9 +255,9 @@ function ReportPage(props: PageProps) {
                                     className="sumary_wrappar margin-top margin-large"
                                 >
                                     <div className="left_sumary">
-                                        <div className="circular-progress" style={{
+                                        <div className="circular-progress" /* style={{
                                             "--percentage": seo.score * 3.6
-                                        }} >
+                                        }} */ >
                                             <div className="value-container">
                                                 <div id="progress"> {seo.score}</div>
                                                 <div>&nbsp;/&nbsp;100</div>

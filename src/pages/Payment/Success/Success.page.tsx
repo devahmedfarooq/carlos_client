@@ -6,7 +6,7 @@ import useLocale from '../../../redux/useLocale';
 
 export default function Success() {
     const { id } = useParams();
-    const { data, isLoading, isError, isSuccess } = useGenereate(id!);
+    const {  isLoading, isError, isSuccess } = useGenereate(id!);
     const { locale } = useLocale()
     const navigate = useNavigate()
     if (isLoading) {
