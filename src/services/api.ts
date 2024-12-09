@@ -1,7 +1,7 @@
 import axios from "axios";
 import Item, { ReportData } from '../types/Item'
 
-const BASEURL = 'http://localhost:3000/v1/api/'
+const BASEURL = 'https://server-empty-dawn-1818.fly.dev/v1/api/'
 const axiosInstance = axios.create({
     baseURL: BASEURL
 })

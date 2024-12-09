@@ -70,7 +70,7 @@ const RandomBold: React.FC<RandomBoldProps> = ({ text }) => {
         // Render words, bolding the selected indexes
         words.forEach((word, index) => {
             const isBold = boldedIndexes.has(index);
-            const wordElement = isBold ? <strong key={index}>{word}</strong> : <span key={index}>{word}</span>;
+            const wordElement = isBold ? <strong key={index}> {word}</strong> : <span key={index}> {word}</span>;
             elements.push(wordElement);
         });
 

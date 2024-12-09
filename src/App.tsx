@@ -8,9 +8,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 function App() {
-
   // const { loading,/*  preview, seo, report, recomend */ } = useData()
   return (
+    
 
     <Router >
       <Routes>
