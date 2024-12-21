@@ -24,6 +24,8 @@ export default function Footer() {
                                     </div>
                                 </div>
                                 <div className="footer1_form-block w-form">
+                                  
+                                  
                                     <form
                                         id="email-form"
                                         name="email-form"
@@ -52,6 +54,8 @@ export default function Footer() {
                                             </a>
                                         </div>
                                     </form>
+
+                                    
                                     <div className="text-size-tiny">
                                         By subscribing you agree to with our{" "}
                                         <a href="privacy.html">
@@ -59,14 +63,14 @@ export default function Footer() {
                                         </a>{" "}
                                         and provide consent to receive updates from our company.
                                     </div>
-                                    <div className="success-message w-form-done">
+                                    {/* <div className="success-message w-form-done">
                                         <div>Thank you! Your submission has been received!</div>
                                     </div>
                                     <div className="error-message w-form-fail">
                                         <div>
                                             Oops! Something went wrong while submitting the form.
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <div className="w-layout-grid footer1_menu-wrapper">

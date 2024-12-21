@@ -1,6 +1,6 @@
 export default function Header() {
 
-    return <header className="section is-hero" style={{ height: "0%", margin: "auto" }} >
+    return <header className="section is-hero" style={{ height: "0%", margin: "auto", zIndex:100 }} >
         <div
             data-collapse="medium"
             data-animation="default"
@@ -9,8 +9,10 @@ export default function Header() {
             data-easing="ease"
             data-easing2="ease"
             role="banner"
-            className="navbar13_component delete-this-class w-nav"
-
+            className="navbar13_component delete-this-class w-nav" 
+            style={{
+                zIndex : 100
+            }}
         >
             <div className="navbar13_container">
 
@@ -29,10 +31,10 @@ export default function Header() {
                 </a>
                 <nav role="navigation" className="navbar13_menu w-nav-menu">
                     <div className="navbar13_menu-link-wrapper">
-                        <a href="#home" className="navbar13_link w-nav-link">
+                        <a href="/" className="navbar13_link w-nav-link">
                             Home
                         </a>
-                        <a href="#features" className="navbar13_link w-nav-link">
+                        <a href="/#features" className="navbar13_link w-nav-link">
                             Features
                         </a>
                         <div className="with-vedion-icon">
@@ -40,10 +42,10 @@ export default function Header() {
                                 <span className="navbar_icon">&nbsp;</span>How it works
                             </a>
                         </div>
-                        <a href="#pricing" className="navbar13_link w-nav-link">
+                        <a href="/#pricing" className="navbar13_link w-nav-link">
                             Pricing
                         </a>
-                        <a href="#faq" className="navbar13_link w-nav-link">
+                        <a href="/#faq" className="navbar13_link w-nav-link">
                             FAQ
                         </a>
                     </div>
