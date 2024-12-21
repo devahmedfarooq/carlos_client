@@ -1,4 +1,5 @@
 import './Report.page.css'
+import '../../css/webflow.css'
 import Item, { Recomendation, SeoItem } from '../../types/Item'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
