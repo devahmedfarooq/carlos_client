@@ -79,22 +79,21 @@ export default function Footer() {
                                         <div className="text-weight-semibold">Map</div>
                                     </div>
                                     <a
-                                        href="index.html"
-                                        aria-current="page"
+                                        href="/#home"
                                         className="footer1_link w--current"
                                     >
                                         Home
                                     </a>
-                                    <a href="#features" className="footer1_link">
+                                    <a href="/#features" className="footer1_link">
                                         Features
                                     </a>
-                                    <a href="#pricing" className="footer1_link">
+                                    <a href="/#pricing" className="footer1_link">
                                         Pricing
                                     </a>
-                                    <a href="#faq" className="footer1_link">
+                                    <a href="/#faq" className="footer1_link">
                                         FAQ
                                     </a>
-                                    <a href="#" className="footer1_link">
+                                    <a href="#how-it-works" className="footer1_link">
                                         How it works
                                     </a>
                                 </div>

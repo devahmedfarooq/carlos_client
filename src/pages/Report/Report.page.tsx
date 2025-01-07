@@ -706,7 +706,7 @@ function ReportPage(props: PageProps) {
 
 
         {
-            Array.isArray(report) && report.map((item, i) => <SectionReport data={item} index={i} imgSrc={imgs[i]} />)
+            Array.isArray(report) && report.map((item, i) => <SectionReport data={item} index={i} imgSrc={imgs[i+2]} />)
         }
 
 

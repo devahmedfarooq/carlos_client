@@ -1,9 +1,15 @@
 import './Home.page.css'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAnalysis } from '../services/mutations.ts'
+import { motion } from 'motion/react'
+
+
 import LoadPage from './Loading/Loading.page.tsx'
 import useLocale from '../redux/useLocale.ts'
 import Accordin from '../components/ui/According.tsx'
+import useMousePos from '../hooks/useMousePos.tsx'
+import TestimonialCard from '../components/ui/TestimonialCard.tsx'
+
 
 export default function HomePage() {
     // const { loaded, unloaded, setReport, setRecomendation } = useData()
@@ -11,6 +17,14 @@ export default function HomePage() {
     const { locale } = useLocale()
     const [is_error, setIsError] = useState(false)
     const mutate = useAnalysis()
+    const { mousePos } = useMousePos()
+
+    const [currentValue, setCurrentValue] = useState(0); // Initialize with 0
+    const targetValue = 82; // Target value
+    const duration = 750; // Duration in ms
+    const intervalTime = 10; // Interval time in ms
+    const increment = targetValue / (duration / intervalTime); // Increment step
+
 
     const handleUrlChange = (e: any) => {
         setURL(e.target.value)
@@ -33,38 +47,60 @@ export default function HomePage() {
     }
 
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentValue((prevValue) => {
+                if (prevValue + increment >= targetValue) {
+                    clearInterval(interval);
+                    return targetValue;
+                }
+                return prevValue + increment;
+            });
+        }, intervalTime);
+
+        return () => clearInterval(interval); // Cleanup interval
+    }, [targetValue, increment]);
+
+
     return (
         <>
             <div id="home" className="section is-hero">
 
                 <div className="background_animation">
-                    <img
+                    <motion.img
                         src="/images/background_0-01.svg"
                         loading="lazy"
                         data-w-id="64c8894d-809f-a9a7-9d27-af984718930c"
                         alt=""
                         className="image"
+                        animate={{ x: Math.min(mousePos.x / 35, 20), transition: { type: "tween", duration: 0.75 } }}
                     />
-                    <img
+                    <motion.img
                         src="/images/background_1-01.svg"
                         loading="lazy"
                         data-w-id="8a7ddf04-710e-74c0-da07-abf82ef4388e"
                         alt=""
                         className="image"
+                        animate={{ x: Math.min(mousePos.x / 10, 18), transition: { type: "tween", duration: 0.75 } }}
+
                     />
-                    <img
+                    <motion.img
                         src="/images/background_2-01.svg"
                         loading="lazy"
                         data-w-id="cefe0b23-b853-fceb-a589-91aa76cbde97"
                         alt=""
                         className="image"
+                        animate={{ x: Math.min(mousePos.x / 45, 16), transition: { type: "tween", duration: 0.75 } }}
+
                     />
-                    <img
+                    <motion.img
                         src="/images/background_3-01.svg"
                         loading="lazy"
                         data-w-id="41c62517-1d6a-78a1-8252-7efd8291a095"
                         alt=""
                         className="image"
+                        animate={{ x: Math.min(mousePos.x / 35, 15), transition: { type: "tween", duration: 0.75 } }}
+
                     />
                 </div>
                 <div className="padding-global relative iii">
@@ -77,7 +113,7 @@ export default function HomePage() {
                                             <span className="text-span"></span>Obtain more sells
                                         </div>
                                     </div>
-                                    <h1 className="hero_heading text-align-center sdf">
+                                    <h1 className="hero_heading text-align-center sdf" style={{ margin: 0 }}>
                                         Improve your SEO
                                     </h1>
                                 </div>
@@ -157,7 +193,9 @@ export default function HomePage() {
 
             </div>
             <>
-                <section id="features" className="section_layout230">
+                <motion.section
+
+                    id="features" className="section_layout230">
                     <div className="padding-global-3">
                         <div className="container-large">
                             <div className="padding-section-large-5">
@@ -174,9 +212,11 @@ export default function HomePage() {
                                         Unlock actionable SEO intelligence in moments, not days.
                                     </p>
                                     <div className="w-layout-grid layout230_component">
-                                        <div
+
+                                        <motion.div
                                             data-w-id="a55acc0b-5fa1-d9e5-db7e-b4410ed7db62"
-                                            style={{ opacity: 1 }}
+                                            style={{ opacity: 0, scale: 0.75 }}
+                                            whileInView={{ opacity: 1, scale: 1, transition: { type: 'tween', delay: 0.25 } }}
                                             className="layout230_item"
                                         >
                                             <div className="layout230_image-wrapper">
@@ -199,10 +239,12 @@ export default function HomePage() {
                                                     className="button-7 is-link is-icon po w-inline-block"
                                                 />
                                             </div>
-                                        </div>
-                                        <div
+                                        </motion.div>
+
+                                        <motion.div
                                             data-w-id="a55acc0b-5fa1-d9e5-db7e-b4410ed7db71"
-                                            style={{ opacity: 1 }}
+                                            style={{ opacity: 0, scale: 0.75 }}
+                                            whileInView={{ opacity: 1, scale: 1, transition: { type: 'tween', delay: 0.40 } }}
                                             className="layout230_item"
                                         >
                                             <div className="layout230_image-wrapper">
@@ -219,10 +261,13 @@ export default function HomePage() {
                                                 Step by step analysis with direct how to improve actions you
                                                 can make.
                                             </p>
-                                        </div>
-                                        <div
+                                        </motion.div>
+
+
+                                        <motion.div
                                             data-w-id="a55acc0b-5fa1-d9e5-db7e-b4410ed7db80"
-                                            style={{ opacity: 1 }}
+                                            style={{ opacity: 0, scale: 0.75 }}
+                                            whileInView={{ opacity: 1, scale: 1, transition: { type: 'tween', delay: 0.55 } }}
                                             className="layout230_item"
                                         >
                                             <div className="layout230_image-wrapper">
@@ -236,279 +281,24 @@ export default function HomePage() {
                                             <h3 className="heading-style-h5-3">Fast, in seconds</h3>
                                             <div className="spacer-xsmall-2" />
                                             <p>Forget about waiting a week for a manual old SEO audit.</p>
-                                        </div>
+                                        </motion.div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-                <div id="featured" className="section hide">
-                    <img
-                        src="/images/features-02.svg"
-                        loading="lazy"
-                        alt=""
-                        className="abs-img _1 _2"
-                    />
-                    <img
-                        src="/images/features-03.svg"
-                        loading="lazy"
-                        alt=""
-                        className="abs-img _1 _2 _4"
-                    />
-                    <div className="padding-global">
-                        <div className="container-large">
-                            <div className="padding-section-medium">
-                                <div className="featured_wrappar laksjdf">
-                                    <h5 className="sumary_heading text-align-center">
-                                        <strong>A WEBSITE ANALYSIS TOOL</strong>
-                                    </h5>
-                                    <div className="w-layout-vflex sumary-heading_wrap margin-vertical margin-medium">
-                                        <h2 className="text-align-center">AI that teaches tough love.</h2>
-                                    </div>
-                                    <p className="text-align-center text-size-medium _2">
-                                        Powerful analysis, no fluff. Elevate from 'meh' to
-                                        masterwork—fast.
-                                    </p>
-                                    <div className="sumary_wrappar margin-top margin-large">
-                                        <div className="left_sumary">
-                                            <div
-                                                className="lottie-animation"
-                                                data-w-id="7bee91a6-b055-4730-7325-d5f8add2fe6e"
-                                                data-animation-type="lottie"
-                                                data-src="documents/Animation---1707907993073.json"
-                                                data-loop={1}
-                                                data-direction={1}
-                                                data-autoplay={1}
-                                                data-is-ix2-target={0}
-                                                data-renderer="svg"
-                                                data-default-duration={4}
-                                                data-duration={0}
-                                            />
-                                            <div className="sumari_text">
-                                                <strong>Overall Score</strong>
-                                            </div>
-                                        </div>
-                                        <div className="right_sumary">
-                                            <h5 className="sumary-card_heading">Summary</h5>
-                                            <p className="sumary_paragraph text-size-medium">
-                                                The website offers a straightforward user experience with a
-                                                focus on book analytics, yet it could benefit from enhanced
-                                                visual engagement and clearer value communication.
-                                            </p>
-                                            <div className="sumary-ran--wrap">
-                                                <a href="#" className="btn-wrap w-button">
-                                                    <strong>Rank: #191</strong>
-                                                </a>
-                                                <a href="#" className="btn-wrap w-button">
-                                                    <strong>Mid-range</strong>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <img
-                                        src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg"
-                                        loading="lazy"
-                                        alt=""
-                                    />
-                                </div>
-                                <div className="sumari_more-section">
-                                    <div className="loading_wrapp-left">
-                                        <div className="left_lottie">
-                                            <div className="wrap_loader">
-                                                <div
-                                                    className="lottie_loading-animation"
-                                                    data-w-id="ec90d788-0d8c-3c34-7a9e-8c604742e0f2"
-                                                    data-animation-type="lottie"
-                                                    data-src="documents/Animation---1707911314216.json"
-                                                    data-loop={1}
-                                                    data-direction={1}
-                                                    data-autoplay={1}
-                                                    data-is-ix2-target={0}
-                                                    data-renderer="svg"
-                                                    data-default-duration={6}
-                                                    data-duration={0}
-                                                />
-                                                <div>
-                                                    <a href="#" className="link">
-                                                        Design and Aesthetics
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <a
-                                                    href="https://www.roastmyweb.com/#designAndAesthetics"
-                                                    className="link"
-                                                >
-                                                    <strong>87 / 100</strong>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="left_lottie">
-                                            <div className="wrap_loader">
-                                                <div
-                                                    className="lottie_loading-animation"
-                                                    data-w-id="8d89feb5-1270-19af-ca27-0b91ad2a48d0"
-                                                    data-animation-type="lottie"
-                                                    data-src="documents/Animation---1707911314216.json"
-                                                    data-loop={1}
-                                                    data-direction={1}
-                                                    data-autoplay={1}
-                                                    data-is-ix2-target={0}
-                                                    data-renderer="svg"
-                                                    data-default-duration={6}
-                                                    data-duration={0}
-                                                />
-                                                <div>
-                                                    <a href="#" className="link">
-                                                        Design and Aesthetics
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <a
-                                                    href="https://www.roastmyweb.com/#designAndAesthetics"
-                                                    className="link"
-                                                >
-                                                    <strong>87 / 100</strong>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="left_lottie">
-                                            <div className="wrap_loader">
-                                                <div
-                                                    className="lottie_loading-animation"
-                                                    data-w-id="c57b7577-7fa0-30c1-eb2b-f841f168a997"
-                                                    data-animation-type="lottie"
-                                                    data-src="documents/Animation---1707911314216.json"
-                                                    data-loop={1}
-                                                    data-direction={1}
-                                                    data-autoplay={1}
-                                                    data-is-ix2-target={0}
-                                                    data-renderer="svg"
-                                                    data-default-duration={6}
-                                                    data-duration={0}
-                                                />
-                                                <div>
-                                                    <a href="#" className="link">
-                                                        Design and Aesthetics
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <a
-                                                    href="https://www.roastmyweb.com/#designAndAesthetics"
-                                                    className="link"
-                                                >
-                                                    <strong>87 / 100</strong>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="rign-sumari">
-                                        <div className="left_lottie">
-                                            <div className="wrap_loader">
-                                                <div
-                                                    className="lottie_loading-animation"
-                                                    data-w-id="8dbec2e6-b8d2-1be2-350b-e681c87283cc"
-                                                    data-animation-type="lottie"
-                                                    data-src="documents/Animation---1707911314216.json"
-                                                    data-loop={1}
-                                                    data-direction={1}
-                                                    data-autoplay={1}
-                                                    data-is-ix2-target={0}
-                                                    data-renderer="svg"
-                                                    data-default-duration={6}
-                                                    data-duration={0}
-                                                />
-                                                <div>
-                                                    <a href="#" className="link">
-                                                        Design and Aesthetics
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <a
-                                                    href="https://www.roastmyweb.com/#designAndAesthetics"
-                                                    className="link"
-                                                >
-                                                    <strong>87 / 100</strong>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="left_lottie">
-                                            <div className="wrap_loader">
-                                                <div
-                                                    className="lottie_loading-animation"
-                                                    data-w-id="c46851e3-e61e-1da9-f6a6-5102c4372967"
-                                                    data-animation-type="lottie"
-                                                    data-src="documents/Animation---1707911314216.json"
-                                                    data-loop={1}
-                                                    data-direction={1}
-                                                    data-autoplay={1}
-                                                    data-is-ix2-target={0}
-                                                    data-renderer="svg"
-                                                    data-default-duration={6}
-                                                    data-duration={0}
-                                                />
-                                                <div>
-                                                    <a href="#" className="link">
-                                                        Design and Aesthetics
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <a
-                                                    href="https://www.roastmyweb.com/#designAndAesthetics"
-                                                    className="link"
-                                                >
-                                                    <strong>87 / 100</strong>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="left_lottie">
-                                            <div className="wrap_loader">
-                                                <div
-                                                    className="lottie_loading-animation"
-                                                    data-w-id="60bd1517-1f91-d1a6-90d1-1fb7aefb3419"
-                                                    data-animation-type="lottie"
-                                                    data-src="documents/Animation---1707911314216.json"
-                                                    data-loop={1}
-                                                    data-direction={1}
-                                                    data-autoplay={1}
-                                                    data-is-ix2-target={0}
-                                                    data-renderer="svg"
-                                                    data-default-duration={6}
-                                                    data-duration={0}
-                                                />
-                                                <div>
-                                                    <a href="#" className="link">
-                                                        Design and Aesthetics
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <a
-                                                    href="https://www.roastmyweb.com/#designAndAesthetics"
-                                                    className="link"
-                                                >
-                                                    <strong>87 / 100</strong>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </motion.section>
+
+
+
             </>
 
 
 
             <>
 
-                <div className="section-2">
+                <motion.div className="section-2 " style={{ opacity: 0, }}
+                    whileInView={{ opacity: 1, transition: { type: 'tween', delay: 0.25 } }}>
                     <img
                         src="/images/Hinterrhein.svg"
                         loading="lazy"
@@ -548,9 +338,14 @@ export default function HomePage() {
                                         className="sumary_wrappar margin-top margin-large"
                                     >
                                         <div className="left_sumary">
-                                            <div className="circular-progress">
+                                            <div
+                                                className="circular-progress"
+                                                style={{
+                                                    "--percentage": currentValue * 3.6, // Update percentage dynamically
+                                                } as React.CSSProperties}
+                                            >
                                                 <div className="value-container">
-                                                    <div id="progress">0</div>
+                                                    <div id="progress">{Math.floor(currentValue)}</div>
                                                     <div>&nbsp;/&nbsp;100</div>
                                                 </div>
                                             </div>
@@ -794,13 +589,78 @@ export default function HomePage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
 
             </>
 
+
+
             <>
-                <section className="section_testimonial24">
+
+                <section id="video" className="section_video">
+                    <div className="padding-global-3">
+                        <div className="container-large">
+                            <div className="padding-section-large-5-video">
+                                <div className="margin-bottom margin-xxlarge">
+                                    <div className="max-width-large">
+                                        <div className="w-layout-vflex flex-block">
+                                            <div className="btn--hero-parent">
+                                                <div>
+                                                    <span className="text-span"></span>Explainer video
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="margin-bottom margin-small">
+                                            <h2>
+                                                <strong>Ready in 1 minute</strong>
+                                            </h2>
+                                        </div>
+                                        <p className="text-size-medium-6">
+                                            In this video, you will understand how Analyzify crawls all the
+                                            information from your website and creates a full customized report
+                                            using the most poweful AI models.
+                                        </p>
+                                        <motion.div
+                                            data-w-id="db2b6512-a6b0-a5ec-c3e7-677900d34e92"
+                                            id="how-it-works"
+                                            className="div-block-7"
+                                            style={{ opacity: 0 }}
+                                            whileInView={{ opacity: 1, transition: { type: 'tween', delay: 0.25 } }}
+                                        >
+                                            <div
+                                                style={{ paddingTop: "56.17021276595745%" }}
+                                                className="w-embed-youtubevideo"
+                                            >
+                                                <iframe
+                                                    src="https://www.youtube.com/embed/2Nx7twchvW0" title="How does Analyzify work"
+                                                    style={{
+                                                        position: "absolute",
+                                                        left: 0,
+                                                        top: 0,
+                                                        width: "100%",
+                                                        height: "100%",
+                                                        pointerEvents: "auto"
+                                                    }}
+                                                    allow="autoplay; encrypted-media"
+                                                />
+                                            </div>
+                                        </motion.div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            </>
+
+
+
+            <>
+                <motion.section style={{ opacity: 0, }}
+                    whileInView={{ opacity: 1, transition: { type: 'tween', delay: 0.25 } }} className="section_testimonial24">
                     <div className="padding-global-3">
                         <div className="container-large">
                             <div className="padding-section-large-5">
@@ -839,277 +699,13 @@ export default function HomePage() {
                                     data-infinite="true"
                                 >
                                     <div className="testimonial24_mask w-slider-mask">
-                                        <div className="testimonial24_slide w-slide">
-                                            <div
-                                                data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b3d9"
-                                                style={{
-                                                    WebkitTransform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    MozTransform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    msTransform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    transform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    opacity: 1
-                                                }}
-                                                className="testimonial24_content"
-                                            >
-                                                <div
-                                                    data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b3da"
-                                                    style={{ opacity: 1 }}
-                                                    className="testimonial24_client"
-                                                >
-                                                    <div className="testimonial24_client-image-wrapper">
-                                                        <img
-                                                            src="images/review1.jpg"
-                                                            loading="lazy"
-                                                            sizes="48px"
-                                                            srcSet="images/review1-p-500.jpg 500w, images/review1-p-800.jpg 800w, images/review1.jpg 938w"
-                                                            alt=""
-                                                            className="testimonial24_customer-image"
-                                                        />
-                                                    </div>
-                                                    <div className="testimonial24_client-info">
-                                                        <p className="text-weight-semibold">Name Surname</p>
-                                                        <p>Position, Company name</p>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b3e2"
-                                                    style={{ opacity: 1 }}
-                                                    className="margin-bottom margin-small"
-                                                >
-                                                    <div className="text-size-medium-6">
-                                                        Analyzify revolutionized our SEO strategy, delivering
-                                                        detailed insights that drove our traffic up by 300% in just
-                                                        6 months!
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b3e5"
-                                                    style={{ opacity: 1 }}
-                                                    className="testimonial_demo"
-                                                >
-                                                    <div className="testimonial24_client-image-wrapper">
-                                                        <img
-                                                            src="images/review_bottom_1.jpg"
-                                                            loading="lazy"
-                                                            alt=""
-                                                            className="testimonial_demo_image"
-                                                        />
-                                                    </div>
-                                                    <div className="testimonial24_client-info">
-                                                        <a href="#" className="text-weight-semibold">
-                                                            See demo report <span className="text-span-2"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="testimonial24_slide w-slide">
-                                            <div
-                                                data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b3ee"
-                                                style={{
-                                                    opacity: 1,
-                                                    WebkitTransform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    MozTransform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    msTransform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    transform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
-                                                }}
-                                                className="testimonial24_content"
-                                            >
-                                                <div
-                                                    data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b3ef"
-                                                    style={{ opacity: 1 }}
-                                                    className="testimonial24_client"
-                                                >
-                                                    <div className="testimonial24_client-image-wrapper">
-                                                        <img
-                                                            src="images/profile.png"
-                                                            loading="lazy"
-                                                            sizes="48px"
-                                                            srcSet="images/profile-p-500.png 500w, images/profile-p-800.png 800w, images/profile.png 938w"
-                                                            alt=""
-                                                            className="testimonial24_customer-image"
-                                                        />
-                                                    </div>
-                                                    <div className="testimonial24_client-info">
-                                                        <p className="text-weight-semibold">Anonymous</p>
-                                                        <p>Unknown, Unknown</p>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b3f7"
-                                                    style={{ opacity: 1 }}
-                                                    className="margin-bottom margin-small"
-                                                >
-                                                    <div className="text-size-medium-6">
-                                                        It is what my company was looking for. Instead of $1000
-                                                        manual audit and 1 week, got the same quality for $5 and 1
-                                                        min.
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b3fa"
-                                                    style={{ opacity: 1 }}
-                                                    className="testimonial_demo"
-                                                >
-                                                    <div className="testimonial24_client-image-wrapper">
-                                                        <img
-                                                            src="images/review_bottom_1.jpg"
-                                                            loading="lazy"
-                                                            alt=""
-                                                            className="testimonial_demo_image"
-                                                        />
-                                                    </div>
-                                                    <div className="testimonial24_client-info">
-                                                        <a href="#" className="text-weight-semibold">
-                                                            See demo report <span className="text-span-2"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="testimonial24_slide w-slide">
-                                            <div
-                                                data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b403"
-                                                style={{
-                                                    WebkitTransform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    MozTransform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    msTransform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    transform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    opacity: 1
-                                                }}
-                                                className="testimonial24_content"
-                                            >
-                                                <div
-                                                    data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b404"
-                                                    style={{ opacity: 1 }}
-                                                    className="testimonial24_client"
-                                                >
-                                                    <div className="testimonial24_client-image-wrapper">
-                                                        <img
-                                                            src="images/review3.jpg"
-                                                            loading="lazy"
-                                                            sizes="48px"
-                                                            srcSet="images/review3-p-500.jpg 500w, images/review3-p-800.jpg 800w, images/review3.jpg 937w"
-                                                            alt=""
-                                                            className="testimonial24_customer-image"
-                                                        />
-                                                    </div>
-                                                    <div className="testimonial24_client-info">
-                                                        <p className="text-weight-semibold">Name Surname</p>
-                                                        <p>Position, Company name</p>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b40c"
-                                                    style={{ opacity: 1 }}
-                                                    className="margin-bottom margin-small"
-                                                >
-                                                    <div className="text-size-medium-6">
-                                                        Our bounce rate dropped by 30% after implementing
-                                                        Analyzify’s suggestions. A must-have tool I can't recommend
-                                                        it enough
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b40f"
-                                                    style={{ opacity: 1 }}
-                                                    className="testimonial_demo"
-                                                >
-                                                    <div className="testimonial24_client-image-wrapper">
-                                                        <img
-                                                            src="images/review_bottom_1.jpg"
-                                                            loading="lazy"
-                                                            alt=""
-                                                            className="testimonial_demo_image"
-                                                        />
-                                                    </div>
-                                                    <div className="testimonial24_client-info">
-                                                        <a href="#" className="text-weight-semibold">
-                                                            See demo report <span className="text-span-2"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="testimonial24_slide w-slide">
-                                            <div
-                                                data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b418"
-                                                style={{
-                                                    WebkitTransform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    MozTransform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    msTransform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    transform:
-                                                        "translate3d(0, 0, 0) scale3d(1.05, 1.05, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
-                                                    opacity: 1
-                                                }}
-                                                className="testimonial24_content"
-                                            >
-                                                <div
-                                                    data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b419"
-                                                    style={{ opacity: 1 }}
-                                                    className="testimonial24_client"
-                                                >
-                                                    <div className="testimonial24_client-image-wrapper">
-                                                        <img
-                                                            src="images/review2.jpg"
-                                                            loading="lazy"
-                                                            sizes="48px"
-                                                            srcSet="images/review2-p-500.jpg 500w, images/review2-p-800.jpg 800w, images/review2.jpg 938w"
-                                                            alt=""
-                                                            className="testimonial24_customer-image"
-                                                        />
-                                                    </div>
-                                                    <div className="testimonial24_client-info">
-                                                        <p className="text-weight-semibold">Name Surname</p>
-                                                        <p>Position, Company name</p>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b421"
-                                                    style={{ opacity: 1 }}
-                                                    className="margin-bottom margin-small"
-                                                >
-                                                    <div className="text-size-medium-6">
-                                                        The recommendations from Analyzify were spot on, leading to
-                                                        a 40% increase in conversions within two months!
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    data-w-id="6b0012c8-7573-9ce4-3d6a-7bf6ff25b424"
-                                                    style={{ opacity: 1 }}
-                                                    className="testimonial_demo"
-                                                >
-                                                    <div className="testimonial24_client-image-wrapper">
-                                                        <img
-                                                            src="images/review_bottom_1.jpg"
-                                                            loading="lazy"
-                                                            alt=""
-                                                            className="testimonial_demo_image"
-                                                        />
-                                                    </div>
-                                                    <div className="testimonial24_client-info">
-                                                        <a href="#" className="text-weight-semibold">
-                                                            See demo report <span className="text-span-2"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                        <TestimonialCard />
+                                        <TestimonialCard />
+                                        <TestimonialCard />
+                                        <TestimonialCard />
+
+
                                     </div>
                                     <div className="testimonial24_arrow is-left w-slider-arrow-left">
                                         <div className="testimonial24_arrow-icon w-embed">
@@ -1148,67 +744,10 @@ export default function HomePage() {
                             </div>
                         </div>
                     </div>
-                </section>
+                </motion.section>
             </>
 
-            <>
 
-                <section id="video" className="section_video">
-                    <div className="padding-global-3">
-                        <div className="container-large">
-                            <div className="padding-section-large-5-video">
-                                <div className="margin-bottom margin-xxlarge">
-                                    <div className="max-width-large">
-                                        <div className="w-layout-vflex flex-block">
-                                            <div className="btn--hero-parent">
-                                                <div>
-                                                    <span className="text-span"></span>Explainer video
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="margin-bottom margin-small">
-                                            <h2>
-                                                <strong>Ready in 1 minute</strong>
-                                            </h2>
-                                        </div>
-                                        <p className="text-size-medium-6">
-                                            In this video, you will understand how Analyzify crawls all the
-                                            information from your website and creates a full customized report
-                                            using the most poweful AI models.
-                                        </p>
-                                        <div
-                                            data-w-id="db2b6512-a6b0-a5ec-c3e7-677900d34e92"
-                                            style={{ opacity: 1 }}
-                                            className="div-block-7"
-                                        >
-                                            <div
-                                                style={{ paddingTop: "56.17021276595745%" }}
-                                                className="w-embed-youtubevideo"
-                                            >
-                                                <iframe
-                                                    src="https://www.youtube.com/embed/5dsgdsVfEn4?rel=0&controls=1&autoplay=0&mute=0&start=0"
-                                                    style={{
-                                                        position: "absolute",
-                                                        left: 0,
-                                                        top: 0,
-                                                        width: "100%",
-                                                        height: "100%",
-                                                        pointerEvents: "auto"
-                                                    }}
-                                                    allow="autoplay; encrypted-media"
-                                                    title="How ir works"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-
-            </>
 
 
 
@@ -1299,7 +838,7 @@ export default function HomePage() {
                                             </div>
                                         </div>
                                         <div className="padding-bottom padding-medium" />
-                                        <a href="#" className="button-4 max-width-full w-button">
+                                        <a href="#home" className="button-4 max-width-full w-button">
                                             Coming soon
                                         </a>
                                     </div>
@@ -1413,7 +952,7 @@ export default function HomePage() {
                                                 </div>
                                             </div>
                                             <div className="padding-bottom padding-medium" />
-                                            <a href="#" className="button-4 max-width-full w-button">
+                                            <a href="#home" className="button-4 max-width-full w-button">
                                                 Analyze now
                                             </a>
                                         </div>
@@ -1497,7 +1036,7 @@ export default function HomePage() {
                                             </div>
                                         </div>
                                         <div className="padding-bottom padding-medium" />
-                                        <a href="#" className="button-4 max-width-full w-button">
+                                        <a href="mailto:support@analyzify.ai" className="button-4 max-width-full w-button">
                                             Contact
                                         </a>
                                     </div>
@@ -2373,7 +1912,7 @@ export default function HomePage() {
                                                     <span className="text-span"></span>Obtain more sells
                                                 </div>
                                             </div>
-                                            <h1 className="hero_heading text-align-center sdf">Start now</h1>
+                                            <h1 className="hero_heading text-align-center sdf" style={{margin : 0}}>Start now</h1>
                                         </div>
                                         <div className="w-layout-vflex margin-top margin-large">
                                             <div className="w-layout-vflex max-width-xlarge text-align-center auto">

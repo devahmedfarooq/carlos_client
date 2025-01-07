@@ -31,14 +31,14 @@ export default function Header() {
                 </a>
                 <nav role="navigation" className="navbar13_menu w-nav-menu">
                     <div className="navbar13_menu-link-wrapper">
-                        <a href="/" className="navbar13_link w-nav-link">
+                        <a href="/#home" className="navbar13_link w-nav-link">
                             Home
                         </a>
                         <a href="/#features" className="navbar13_link w-nav-link">
                             Features
                         </a>
                         <div className="with-vedion-icon">
-                            <a href="#" className="navbar13_link _1 w-nav-link">
+                            <a href="/#how-it-works" className="navbar13_link _1 w-nav-link">
                                 <span className="navbar_icon">&nbsp;</span>How it works
                             </a>
                         </div>
