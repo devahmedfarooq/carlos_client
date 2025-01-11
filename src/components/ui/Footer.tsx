@@ -1,4 +1,13 @@
+import { useForm, SubmitHandler } from "react-hook-form"
+import { NewsLetterAdd } from "../../services/api"
+interface Input {
+    email: string
+}
+
 export default function Footer() {
+
+    const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm<Input>()
+    const onSubmit: SubmitHandler<Input> = data => NewsLetterAdd(data)
 
     return <> <footer className="footer1_component">
         <div className="padding-global-3">
@@ -24,38 +33,46 @@ export default function Footer() {
                                     </div>
                                 </div>
                                 <div className="footer1_form-block w-form">
-                                  
-                                  
+
+
                                     <form
                                         id="email-form"
                                         name="email-form"
                                         data-name="Email Form"
-                                        method="get"
                                         className="footer1_form"
                                         data-wf-page-id="65cc776f094151ffa9f05627"
                                         data-wf-element-id="c4bf2222-0138-798e-fdec-51524fab645e"
+                                        onSubmit={handleSubmit(onSubmit)}
                                     >
                                         <input
                                             className="form_input-2 w-input"
                                             maxLength={256}
-                                            name="email-2"
-                                            data-name="Email 2"
                                             placeholder="Enter your email"
                                             type="email"
+                                            {...register("email")}
                                             id="email-2"
-                                            required={true}
                                         />
+
+
+
+
+
                                         <div className="div-block-5">
-                                            <a
-                                                href="#"
+                                            <input
+                                                type="submit"
                                                 className="button-6 is-secondary is-small w-button"
-                                            >
-                                                Subscribe
-                                            </a>
+                                                value={"Submit"}
+                                            />
                                         </div>
                                     </form>
 
+                                    {
+                                        isSubmitSuccessful && <p>Thanks for joining our newsletter</p>
+                                    }
+
                                     
+
+
                                     <div className="text-size-tiny">
                                         By subscribing you agree to with our{" "}
                                         <a href="privacy.html">
@@ -93,7 +110,7 @@ export default function Footer() {
                                     <a href="/#faq" className="footer1_link">
                                         FAQ
                                     </a>
-                                    <a href="#how-it-works" className="footer1_link">
+                                    <a href="/#how-it-works" className="footer1_link">
                                         How it works
                                     </a>
                                 </div>
@@ -220,10 +237,10 @@ export default function Footer() {
                                 © 2024 Analyzify. All rights reserved.
                             </div>
                             <div className="w-layout-grid footer1_legal-list">
-                                <a href="privacy.html" className="footer_link">
+                                <a href="policy" className="footer_link">
                                     Privacy Policy
                                 </a>
-                                <a href="terms-and-conditions.html" className="footer_link">
+                                <a href="/terms" className="footer_link">
                                     Terms &amp; Conditions
                                 </a>
                             </div>

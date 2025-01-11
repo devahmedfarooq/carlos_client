@@ -5,6 +5,8 @@ import Success from "./pages/Payment/Success/Success.page.tsx";
 import ReportPage from "./pages/Report/Report.page.tsx"
 //import useData from "./redux/useData.ts"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Terms from "./pages/Terms/Terms.page.tsx";
+import Policy from "./pages/Policy/Policy.tsx";
 
 
 
@@ -17,6 +19,8 @@ function App() {
       <Routes>
         <Route path="/report/:id" element={<ReportPage />} />
         <Route path="/payment/success/:id" element={<Success />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/policy" element={<Policy />} />
         <Route path="/"
           element={<HomePage />} />
         <Route path="*" element={<ErrorPage />} />

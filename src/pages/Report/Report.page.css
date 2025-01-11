@@ -30,3 +30,10 @@
     /* objectPosition will control the portion of the image shown */
   }
   
+
+  @media (max-width: 768px) {
+    .cropped-img {
+      height: auto; /* Let the height adapt to maintain aspect ratio */
+      max-height: 42vh; /* Ensure it doesn’t exceed the viewport height */
+    }
+  }

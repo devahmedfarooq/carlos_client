@@ -1,7 +1,7 @@
 import axios from "axios";
 import Item, { ReportData } from '../types/Item'
 
-const BASEURL =  "http://localhost:3000/v1/api/" //'https://server-empty-dawn-1818.fly.dev/v1/api/'
+const BASEURL = "http://localhost:3000/v1/api/" //'https://server-empty-dawn-1818.fly.dev/v1/api/'
 const axiosInstance = axios.create({
     baseURL: BASEURL
 })
@@ -44,7 +44,11 @@ interface PaymentResponse {
 }
 
 interface PaymentSuccessResponse {
-    msg : string
+    msg: string
+}
+
+interface NewsLetterInput {
+    email: string
 }
 
 export async function getReport(id: string | undefined) {
@@ -67,9 +71,13 @@ export async function senderReportModel(id: string) {
     return (((await axiosInstance.get<SchemaReportSenderReportModel>(`analyze/report-sender?id=${id}`)).data))
 }
 
-export async function paymentIntialize(id: string, ) {
+export async function paymentIntialize(id: string,) {
     return ((await axiosInstance.get<PaymentResponse>(`payment?id=${id}`)).data)
 }
 export async function paymentSuccess(id: string) {
     return ((await axiosInstance.get<PaymentSuccessResponse>(`payment/success?id=${id}`)).data)
+}
+
+export async function NewsLetterAdd(data: NewsLetterInput) {
+    return ((await axiosInstance.post("newsletter", { email: data.email })).data)
 }

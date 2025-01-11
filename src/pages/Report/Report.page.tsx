@@ -204,7 +204,7 @@ function ReportPage(props: PageProps) {
     }, []);
 
 
-    return <section ref={pageRef}>
+    return <section id='home' ref={pageRef}>
 
         {
             report && seo && <div id="featured" ref={sectionRef}
