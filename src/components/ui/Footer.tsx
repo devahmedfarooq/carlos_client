@@ -118,16 +118,16 @@ export default function Footer() {
                                     <div className="margin-bottom margin-xsmall">
                                         <div className="text-weight-semibold">Demos</div>
                                     </div>
-                                    <a href="#" className="footer1_link">
+                                    <a href="https://carlos-client.vercel.app/report/678422671e36a5bf9b9e2d2d" className="footer1_link">
                                         Food website
                                     </a>
-                                    <a href="#" className="footer1_link">
+                                    <a href="https://carlos-client.vercel.app/report/6784235451a269e209c2e0f2" className="footer1_link">
                                         Videogame website
                                     </a>
-                                    <a href="#" className="footer1_link">
+                                    <a href="https://carlos-client.vercel.app/report/678426c13f4dd75f3ae9033a" className="footer1_link">
                                         Forum home
                                     </a>
-                                    <a href="#" className="footer1_link">
+                                    <a href="https://carlos-client.vercel.app/report/67842a81d2092ec53eefe971" className="footer1_link">
                                         Startup landing
                                     </a>
                                 </div>

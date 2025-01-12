@@ -7,8 +7,8 @@ import './index.css'
 
 import MainLayout from './layout/Main.layout.tsx'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-/* import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
- */const queryClient = new QueryClient({
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 5,
@@ -24,7 +24,7 @@ createRoot(document.getElementById('root')!).render(
       <MainLayout>
         <App />
       </MainLayout>
-{/*       <ReactQueryDevtools client={queryClient} initialIsOpen={false} />
- */}    </QueryClientProvider>
+      <ReactQueryDevtools client={queryClient} initialIsOpen={false} />
+    </QueryClientProvider>
   </StrictMode>,
 )
