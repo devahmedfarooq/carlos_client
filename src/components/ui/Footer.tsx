@@ -6,7 +6,7 @@ interface Input {
 
 export default function Footer() {
 
-    const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm<Input>()
+    const { register, handleSubmit, formState: { isSubmitSuccessful } } = useForm<Input>()
     const onSubmit: SubmitHandler<Input> = data => NewsLetterAdd(data)
 
     return <> <footer className="footer1_component">
@@ -70,7 +70,7 @@ export default function Footer() {
                                         isSubmitSuccessful && <p>Thanks for joining our newsletter</p>
                                     }
 
-                                    
+
 
 
                                     <div className="text-size-tiny">
